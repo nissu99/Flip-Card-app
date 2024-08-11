@@ -27,7 +27,7 @@ export default function Quiz() {
       }
     };
     fetchData();
-  }, [currentPage]);
+  }, []);
 
   const prevHandler = () => {
     if (currentPage > 1) {
