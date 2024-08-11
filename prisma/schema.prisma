@@ -14,8 +14,7 @@ datasource db {
 }
 
 model FlashCards {
-  id        Int     @id @default(autoincrement())
-  problem   String 
+  id      Int    @id @default(autoincrement())
+  problem String
   answer  String
 }
-

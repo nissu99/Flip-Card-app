@@ -6,30 +6,19 @@ function QuizCard({ question, answer }:any) {
   const handleFlip = () => {
     setIsFlipped(!isFlipped);
   };
-  const handleNext = () => {
-    setIsFlipped(false);
-    setCurindex((prevIndex) => (prevIndex + 1) % question.length);
-  };
- const handlePrevious = () => {
-    setIsFlipped(false);
-    setCurindex((prevIndex) => 
-      prevIndex === 0 ? question.length - 1 : prevIndex - 1
-    );
-  };
-  return (
-    <div className="card-container" onClick={handleFlip}>
+    return (
+
+    <div   className="relative w-full max-w-lg mx-auto perspective cursor-pointer"onClick={handleFlip}>
       <div className={`card ${isFlipped ? 'flipped' : ''}`}>
         <div className="card-front">
-          <h2>Question</h2>
+            <h2 className="text-3xl font-extrabold text-yellow-300 mb-4">Question</h2>
           <p>{question}</p>
         </div>
         <div className="card-back">
-          <h2>Answer</h2>
+            <h2 className="text-3xl font-extrabold text-green-300 mb-4">Answer</h2>
           <p>{answer}</p>
         </div>
       <div className="navigation">
-        <button onClick={handlePrevious}>Previous</button>
-        <button onClick={handleNext}>Next</button>
       </div>
       </div>
     </div>
