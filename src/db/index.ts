@@ -24,7 +24,6 @@ export async function countCards(){
 return count;
 }
 export async function delFlashCard(identity:number){
-    await prisma.flashCards.d
 const delCard= await prisma.flashCards.delete({
 
         where:{
