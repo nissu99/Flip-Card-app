@@ -48,3 +48,15 @@ const updateUser = await prisma.flashCards.update({
   },
 })
 }
+export async function findLastId(){
+const lastId = await prisma.flashCards.findFirst({
+    select:{
+        id:true,
+    },
+    orderBy:{
+        id:'desc'
+    },
+    take:1,
+})
+return lastId?.id;
+}

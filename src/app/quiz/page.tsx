@@ -1,7 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import QuizCard from "@/components/flipcard";
-import { countCards, flashCards } from "@/db";
+import { countCards, findLastId, flashCards } from "@/db";
 import { useEffect, useState } from "react";
 import ProgressBar from "@/components/progress-bar";
 
@@ -15,13 +15,13 @@ export default function Quiz() {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [res, setRes] = useState<resProps[]>([]);
   const [totalPages, setTotalPages] = useState<number>(0);
-
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await flashCards(currentPage);
         const tp = await countCards();
-        setTotalPages(tp);
+        const meet = await findLastId();
+        setTotalPages(meet);
         setRes(response);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -30,6 +30,7 @@ export default function Quiz() {
     fetchData();
   }, [currentPage]);
 
+  
   const prevHandler = () => {
     if (currentPage > 1) {
       setCurrentPage((prevPage) => prevPage - 1);
@@ -79,7 +80,7 @@ export default function Quiz() {
         </div>
       </div>
       <div className="w-full max-w-4xl">
-        <ProgressBar currentAmount={currentPage} maxAmount={totalPages} streak={0} />
+        <ProgressBar  currentAmount={currentPage} maxAmount={totalPages} streak={0} />
       </div>
     </div>
   );
