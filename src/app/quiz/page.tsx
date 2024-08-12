@@ -14,7 +14,7 @@ interface resProps {
 export default function Quiz() {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [res, setRes] = useState<resProps[]>([]);
-  const [totalPages, setTotalPages] = useState<number>(0);
+  const [totalPages, setTotalPages] = useState<any>(0);
   useEffect(() => {
     const fetchData = async () => {
       try {
