@@ -23,11 +23,11 @@ export async function countCards(){
     const count= await prisma.flashCards.count();
 return count;
 }
-export async function delFlashCard(identity:number){
+export async function delFlashCard(id:number){
 const delCard= await prisma.flashCards.delete({
 
         where:{
-            id:identity
+            id:id
         }
     });
     return delCard;

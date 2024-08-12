@@ -1,0 +1,44 @@
+.progress {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  bottom: 2rem;
+  left: 2rem;
+  width: calc(100% - 4rem);
+}
+
+.progress .bar {
+  width: 100%;
+  max-width: 600px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid var(--clr-background-400);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.progress .bar__fill {
+  background-image: linear-gradient(to right, #8B0000, #CD5C5C);
+}
+
+.progress .bar .percentage {
+  margin: 0;
+  user-select: none;
+  width: 8ch;
+  text-align: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  position: absolute;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  top: 50%;
+  left: 50%;
+  mix-blend-mode: difference;
+  transform: translate(-50%, -50%);
+  color: white;
+}

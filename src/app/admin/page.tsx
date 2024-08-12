@@ -19,14 +19,20 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
+import toast,{Toaster} from "react-hot-toast";
 
 export default function Admin() {
   const [problem, setProblem] = useState("");
   const [update,getUpdate]=useState("");
   const [answer, setAnswer] = useState("");
   const [id, setId] = useState<string>("");
-
+  const [updateProblem,setUpdateProblem]= useState<string>("");
+  const [updateAnswer,setUpdateAnswer]=useState<string>("");
+  const [updateId,setUpdateId]=useState<string>("");
   const clearInput = () => {
+    setUpdateAnswer("");
+    setUpdateProblem("");
+    setUpdateId("");
     setProblem("");
     setAnswer("");
     setId("");
@@ -38,24 +44,33 @@ export default function Admin() {
     clearInput();
   };
 
-  const handleDelete = (e: { preventDefault: () => void }) => {
-    e.preventDefault();
+  const handleDelete = () => {
     delFlashCard(parseInt(id));
     clearInput();
   };
-  const handleUpdate=(e: { preventDefault: () => void; })=>{
-    e.preventDefault();
-    updateCard(parseInt(id),problem,answer);
+  const handleUpdate=()=>{
+    updateCard(parseInt(updateId),updateProblem ,updateAnswer);
 
+  }
+  const notify= ()=>{
+toast("Another Flash Card Created")    
+  }
+  const bigHander =()=>{
+    handleDelete();
+    notify();
+  }
+  const notifyUpdate=()=>{
+    toast("Flash Card Updated")
+  }
+  const anotherHandler=()=>{
+    handleUpdate();
+    notifyUpdate();
   }
 
   return (
     <div className="bg-slate-100 w-full min-h-screen flex flex-col items-center justify-center p-6">
       <h1 className="text-3xl font-bold text-gray-800 mb-8">Admin Board</h1>
       <div className="flex flex-col md:flex-row justify-center items-start gap-8">
-
-
-
 
         <Card className="w-full md:w-[350px] bg-white shadow-xl rounded-lg">
           <CardHeader>
@@ -68,6 +83,7 @@ export default function Admin() {
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit}>
+              <Toaster/>
               <div className="grid w-full items-center gap-4">
                 <div className="flex flex-col space-y-1.5">
                   <Label
@@ -106,7 +122,6 @@ export default function Admin() {
                   >
                     Framework
                   </Label>
-                  {/* Add framework selection if required */}
                 </div>
               </div>
               <CardFooter className="flex justify-between mt-4">
@@ -121,8 +136,10 @@ export default function Admin() {
                 <Button
                   type="submit"
                   className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                  onClick={notify}
                 >
                   Submit
+                  <Toaster/>
                 </Button>
               </CardFooter>
             </form>
@@ -172,7 +189,7 @@ export default function Admin() {
             <Button
               variant="outline"
               className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700"
-              onClick={handleDelete}
+              onClick={bigHander}
             >
               Delete
             </Button>
@@ -180,6 +197,67 @@ export default function Admin() {
         </Card>
 
 
+
+
+
+    <Card className="w-full md:w-[350px] bg-white shadow-xl rounded-lg">
+          <CardHeader>
+            <CardTitle className="text-lg font-bold text-gray-900">
+              Update a Card
+            </CardTitle>
+            <CardDescription className="text-sm text-gray-600">
+              You can update a card
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <form onSubmit={handleUpdate}>
+              <div className="grid w-full items-center gap-4">
+                <div className="flex flex-col space-y-1.5">
+                  <Label htmlFor="id" className="font-semibold text-gray-700">
+                    Flip Card ID
+                  </Label>
+                  <Input
+                    id="id"
+                    placeholder="ID of your card"
+                    value={updateId}
+                    onChange={(e) => setUpdateId(e.target.value)}
+                    className="border rounded-md p-2 text-gray-700"
+                  />
+                  <Input
+                    id="id"
+                    placeholder="update the problem"
+                    value={updateProblem}
+                    onChange={(e) => setUpdateProblem(e.target.value)}
+                    className="border rounded-md p-2 text-gray-700"
+                  />
+                <Input
+                    id="id"
+                    placeholder="Update the answer "
+                    value={updateAnswer}
+                    onChange={(e) => setUpdateAnswer(e.target.value)}
+                    className="border rounded-md p-2 text-gray-700"
+                  />
+                </div>
+              </div>
+            </form>
+          </CardContent>
+          <CardFooter className="flex justify-between mt-4">
+            <Button
+              variant="outline"
+              className="px-4 py-2 text-gray-700 border border-gray-300 rounded-md hover:bg-gray-100"
+              onClick={clearInput}
+            >
+              Cancel
+            </Button>
+            <Button
+              variant="outline"
+              className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700"
+              onClick={anotherHandler}
+            >
+              Update
+            </Button>
+          </CardFooter>
+        </Card>
 
 
 
